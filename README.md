@@ -2,6 +2,7 @@ Bowling Game Kata
 =================
 > Uncle Bob's classic implemented in *JavaScript*
 
+>This is a fork of [@hontas's project](https://github.com/hontas/bowling-game-kata), which uses Karma for the tests. In this case, I use Jasmine.
 [bowling-score]: http://www.wpclipart.com/recreation/sports/bowling/bowling_scoresheet_example.png "bowling score card"
 
 
@@ -18,7 +19,7 @@ that frame is the number of pins knocked down by the next roll.  So in frame 3
 above, the score is 10 (the total number knocked down) plus a bonus of 5 (the
 number of pins knocked down on the next roll.)
 
-A strike is when the player knocks down all 10 pins on his first try.  The bonus
+A strike is when the player knocks down all 10 pins on their first try.  The bonus
 for that frame is the value of the next two balls rolled.
 
 In the tenth frame a player who rolls a spare or strike is allowed to roll the extra
@@ -47,47 +48,21 @@ The score for a spare or a strike depends on the frames successor
 
 ## Begin
 
-* Create directory bowling-game
-* Create bowlingGame.js
-* Create bowlingGame-tests.js
-
-```js
-// bowlingGame-tests.js
-describe("BowlingGame", function() {
-	
-});
-```
-
-Install and configure *karma test-runner*
-
-```
-npm install -g karma
-npm install -g karma-mocha
-npm install -g karma-chai
-karma init
-
-	Testing framework: mocha
-	Require.js: no
-	Capture browser: PhantomJS
-	Source and test files: *.js
-	Excluded:
-	Run tests on change: yes
-```
-
-Open the created configuration file and change `frameworks: ['mocha'],` to `frameworks: ['mocha', 'chai'],`.  
-Kick-start the test runner typing `karma start` and hitting `ENTER`
-
+* Download Jasmine standalone version: https://github.com/jasmine/jasmine/releases
+* Add a file `BowlingGameSpec.js` in `spec`
+* Add a file `BowlingGame.js` in `src`
+* Update `SpecRunner.html` to include these files
 
 ## The first test
 
 ```js
 describe("BowlingGame", function() {
-	it("handle gutter game", function() {
+	it("should handle a gutter game", function() {
 		var game = new BowlingGame();
 		for (var i = 0; i < 20; i++) {
 			game.roll(0);
 		}
-		expect(game.score()).to.equal(0);
+		expect(game.score()).toEqual(0);
 	});
 });
 ```
@@ -109,14 +84,14 @@ describe("BowlingGame", function() {
 		}
 	}
 
-	it("handle gutter game", function() {
+	it("should handle a gutter game", function() {
 		rollMany(20, 0);
-		expect(game.score()).to.equal(0);
+		expect(game.score()).toEqual(0);
 	});
 
 	it("should handle all ones", function() {
 		rollMany(20, 1);
-		expect(game.score()).to.equal(20);
+		expect(game.score()).toEqual(20);
 	});
 });
 ```
@@ -143,21 +118,21 @@ describe("BowlingGame", function() {
 		game.roll(5);
 	}
 
-	it("handle gutter game", function() {
+	it("should handle a gutter game", function() {
 		rollMany(20, 0);
-		expect(game.score()).to.equal(0);
+		expect(game.score()).toEqual(0);
 	});
 
 	it("should handle all ones", function() {
 		rollMany(20, 1);
-		expect(game.score()).to.equal(20);
+		expect(game.score()).toEqual(20);
 	});
 
 	it("should handle one spare", function() {
 		rollSpare();
 		game.roll(3);
 		rollMany(17, 0);
-		expect(game.score()).to.equal(16);
+		expect(game.score()).toEqual(16);
 	});
 });
 ```
@@ -188,21 +163,21 @@ describe("BowlingGame", function() {
 		game.roll(10);
 	}
 
-	it("should handle gutter game", function() {
+	it("should handle a gutter game", function() {
 		rollMany(20, 0);
-		expect(game.score()).to.equal(0);
+		expect(game.score()).toEqual(0);
 	});
 
 	it("should handle all ones", function() {
 		rollMany(20, 1);
-		expect(game.score()).to.equal(20);
+		expect(game.score()).toEqual(20);
 	});
 
 	it("should handle one spare", function() {
 		rollSpare();
 		game.roll(3);
 		rollMany(17, 0);
-		expect(game.score()).to.equal(16);
+		expect(game.score()).toEqual(16);
 	});
 
 	it("should handle one strike", function() {
@@ -210,7 +185,7 @@ describe("BowlingGame", function() {
 		game.roll(3);
 		game.roll(4);
 		rollMany(16, 0);
-		expect(game.score()).to.equal(24);
+		expect(game.score()).toEqual(24);
 	});
 });
 ```
@@ -241,21 +216,21 @@ describe("BowlingGame", function() {
 		game.roll(10);
 	}
 
-	it("should handle gutter game", function() {
+	it("should handle a gutter game", function() {
 		rollMany(20, 0);
-		expect(game.score()).to.equal(0);
+		expect(game.score()).toEqual(0);
 	});
 
 	it("should handle all ones", function() {
 		rollMany(20, 1);
-		expect(game.score()).to.equal(20);
+		expect(game.score()).toEqual(20);
 	});
 
 	it("should handle one spare", function() {
 		rollSpare();
 		game.roll(3);
 		rollMany(17, 0);
-		expect(game.score()).to.equal(16);
+		expect(game.score()).toEqual(16);
 	});
 
 	it("should handle one strike", function() {
@@ -263,12 +238,12 @@ describe("BowlingGame", function() {
 		game.roll(3);
 		game.roll(4);
 		rollMany(16, 0);
-		expect(game.score()).to.equal(24);
+		expect(game.score()).toEqual(24);
 	});
 
 	it("should handle a perfect game", function() {
 		rollMany(12, 10);
-		expect(game.score()).to.equal(300);
+		expect(game.score()).toEqual(300);
 	});
 });
 ```
